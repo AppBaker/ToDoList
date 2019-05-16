@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToDo {
+@objcMembers class ToDo: NSObject {
     //MARK: - Stored Properties
     var title: String
     var isComplete: Bool
@@ -28,6 +28,10 @@ class ToDo {
         self.dueDate = dueDate
         self.notes = notes
         self.image = image
+    }
+    
+    deinit {
+        print(Date(), #line, #function, title)
     }
     //MARK: - Computed properties
     var keys: [String] {
@@ -53,6 +57,19 @@ class ToDo {
             ToDo(title: "Buy butter", isComplete: false, dueDate: Date(), notes: "Prostokvashino"),
             ToDo(title: "Complete project", isComplete: false, dueDate: Date())
         ]
+    }
+}
+
+extension ToDo: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let todo = ToDo()
+        
+        keys.forEach {
+            let value = self.value(forKey: $0)
+            todo.setValue(value, forKey: $0)
+        }
+        
+        return todo
     }
 }
 

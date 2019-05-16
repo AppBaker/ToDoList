@@ -49,6 +49,25 @@ extension ToDoTableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let todo = todos[indexPath.row]
         let controller = segue.destination as! ToDoItemViewController
+        controller.title = "Edit"
         controller.todo = todo
+    }
+    
+    @IBAction func unwind(segue: UIStoryboardSegue ) {
+        guard segue.identifier == "unwindSegue" else { return }
+        let todo = (segue.source as! ToDoItemViewController).todo
+        
+        if let selectedIndex = tableView.indexPathForSelectedRow {
+            //TODO: edit in place
+            todos[selectedIndex.row] = todo
+            tableView.reloadRows(at: [selectedIndex], with: .automatic)
+        } else {
+            //TODO: add new element
+            let indexPath = IndexPath(row: todos.count, section: 0)
+            todos.append(todo)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
+        print(Date(), #line, #function)
+        tableView.reloadData()
     }
 }

@@ -11,4 +11,5 @@ import UIKit
 protocol CellActionDelegate: class {
     func cell(editingEnded textField: UITextField, forSection section: Int)
     func cell(textChanged textField: UITextField, forSection section: Int)
+    func cell(switchToddled switch: UISwitch, forSection section: Int)
 }

@@ -37,9 +37,13 @@ class Configurator {
             cell.isCompleteSwitch.isOn = value
             if isEditing {
                 cell.isCompleteSwitch.isEnabled = true
+                cell.isCompleteSwitch.isOn = value
             } else {
                 cell.isCompleteSwitch.isEnabled = false
+                cell.isCompleteSwitch.isOn = value
             }
+            cell.delegate = controller
+            cell.section = section
             return cell
         } else if let value = value as? Date {
             let cell = controller.tableView.dequeueReusableCell(withIdentifier: "StringCell") as! StringCell
@@ -62,7 +66,6 @@ class Configurator {
                 
                 cell.textField.inputAccessoryView = toolBarDatePicker
                 
-                cell.textField.addTarget(controller, action: #selector(controller.textFieldEndEdeting), for: .allTouchEvents)
                 cell.textField.isHidden = false
                 cell.label.isHidden = true
                 cell.textField.text = value.formatted

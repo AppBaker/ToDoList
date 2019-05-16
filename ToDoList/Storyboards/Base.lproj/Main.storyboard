@@ -47,7 +47,7 @@
             </objects>
             <point key="canvasLocation" x="1208" y="145"/>
         </scene>
-        <!--Title-->
+        <!--Add-->
         <scene sceneID="1LE-x4-9L0">
             <objects>
                 <tableViewController id="GZK-lb-zAC" customClass="ToDoItemViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -105,6 +105,9 @@
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ytg-O6-pqN">
                                             <rect key="frame" x="20" y="6.5" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchToggled:" destination="VLA-eK-UpJ" eventType="valueChanged" id="bhZ-7g-KqV"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>
@@ -122,9 +125,13 @@
                             <outlet property="delegate" destination="GZK-lb-zAC" id="CiG-2L-h9q"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="KDd-w5-0Nk"/>
+                    <navigationItem key="navigationItem" title="Add" id="KDd-w5-0Nk"/>
+                    <connections>
+                        <segue destination="Q2G-Bb-1uL" kind="unwind" identifier="unwindSegue" unwindAction="unwindWithSegue:" id="t0S-Rk-c3W"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcq-JK-l1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Q2G-Bb-1uL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2030" y="139"/>
         </scene>

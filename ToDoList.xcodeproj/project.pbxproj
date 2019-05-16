@@ -51,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4387EE3228B250800379DD4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E44B0B482272241B000E5A05 /* Main.storyboard */,
+				E44B0B4D2272241E000E5A05 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		E44B0B382272241A000E5A05 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +79,7 @@
 		E44B0B432272241B000E5A05 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				E4387EE3228B250800379DD4 /* Storyboards */,
 				E4F4DA4D2276BFC3006061D3 /* View */,
 				E4F4DA482276B885006061D3 /* Other controllers */,
 				E4F4DA502276C13E006061D3 /* Protocols */,
@@ -120,8 +130,6 @@
 		E4F4DA4D2276BFC3006061D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E44B0B482272241B000E5A05 /* Main.storyboard */,
-				E44B0B4D2272241E000E5A05 /* LaunchScreen.storyboard */,
 				E4F4DA4E2276C07F006061D3 /* StringCell.swift */,
 				E4F4DA552276E538006061D3 /* BoolCell.swift */,
 			);
