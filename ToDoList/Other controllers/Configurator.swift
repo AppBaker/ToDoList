@@ -9,10 +9,12 @@
 import UIKit
 
 class Configurator {
-    func configure(_ cell: UITableViewCell, with todo: ToDo) {
+    func configure(_ cell: UITableViewCell, with todo: ToDoMO) {
         cell.textLabel?.text = todo.title
-        cell.detailTextLabel?.text = todo.dueDate.formatted
-        cell.imageView?.image = todo.image
+        cell.detailTextLabel?.text = todo.dueDate?.formatted
+        if let imageData = todo.image {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
     }
     
     func getConfigureCell(in controller: ToDoItemViewController, forSection section: Int) -> UITableViewCell {
