@@ -12,11 +12,7 @@ class ToDoTableViewController: UITableViewController {
     
     let configurator = Configurator()
     var todos = [ToDo]()
-    var todosMO = [ToDoMO]() {
-        didSet {
-            DataManager.manager.saveContext()
-        }
-    }
+    var todosMO = [ToDoMO]()
 }
 
 //MARK: - UIViewController Methods
@@ -43,6 +39,25 @@ extension ToDoTableViewController {
     
 }
 
+// MARK: - UITableViewDelegat
+extension ToDoTableViewController {
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "delete row")) { (action, indexPath) in
+            
+            DataManager.manager.context.delete(self.todosMO[indexPath.row])
+            self.todosMO.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            DataManager.manager.saveContext()
+            //            self.tableView.reloadData()
+            
+        }
+        
+        return [deleteAction]
+    }
+    
+}
+
 // MARK: - Navigation
 extension ToDoTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,18 +72,25 @@ extension ToDoTableViewController {
     @IBAction func unwind(segue: UIStoryboardSegue ) {
         guard segue.identifier == "unwindSegue" else { return }
         let todo = (segue.source as! ToDoItemViewController).todo
-        let todoMO = ToDoMO(todo)
+//        let todoMO = ToDoMO(todo)
         
         if let selectedIndex = tableView.indexPathForSelectedRow {
-            //TODO: edit in place
-            todosMO.remove(at: selectedIndex.row)
-            todosMO.insert(todoMO, at: selectedIndex.row)
+            let todoMO = todosMO[selectedIndex.row]
+            todoMO.title = todo.title
+            todoMO.dueDate = todo.dueDate
+            todoMO.isComplete = todo.isComplete
+            if let image = todo.image {
+                todoMO.image = image.pngData()
+            }
+            
+            
             tableView.reloadRows(at: [selectedIndex], with: .automatic)
         } else {
             //TODO: add new element
             let indexPath = IndexPath(row: todosMO.count, section: 0)
-            todosMO.append(todoMO)
+            todosMO.append(ToDoMO(todo))
             tableView.insertRows(at: [indexPath], with: .automatic)
         }
+        DataManager.manager.saveContext()
     }
 }
