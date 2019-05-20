@@ -9,6 +9,8 @@
 import UIKit
 
 class Configurator {
+    
+    var dueDate = Date()
     func configure(_ cell: UITableViewCell, with todo: ToDoMO) {
         cell.textLabel?.text = todo.title
         cell.detailTextLabel?.text = todo.dueDate?.formatted
@@ -51,9 +53,9 @@ class Configurator {
             let cell = controller.tableView.dequeueReusableCell(withIdentifier: "StringCell") as! StringCell
             
             if isEditing {
-                
-                let datePicker = UIDatePicker()
+                let datePicker = MyUIDatePicker()
                 datePicker.datePickerMode = .date
+                datePicker.indexPath = IndexPath(row: 0, section: section)
                 cell.textField.inputView = datePicker
                 
                 let toolBarDatePicker = UIToolbar()
@@ -62,9 +64,12 @@ class Configurator {
                 toolBarDatePicker.tintColor = UIColor.white
                 toolBarDatePicker.sizeToFit()
                 
-                let doneButtonDate = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: controller, action: #selector(controller.textFieldEndEdeting))
+                let doneButtonDate = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: controller, action: #selector(controller.dateEndEdeting))
                 toolBarDatePicker.setItems([doneButtonDate], animated: false)
                 toolBarDatePicker.isUserInteractionEnabled = true
+                datePicker.addTarget(controller, action: #selector(controller.dateChange(_:)), for: .valueChanged)
+                
+                
                 
                 cell.textField.inputAccessoryView = toolBarDatePicker
                 

@@ -37,7 +37,6 @@ extension ToDoItemViewController: CellActionDelegate {
             todo.setValue(isSet, forKey: key)
         }
     }
-    
 }
 
 // MARK: - Custom methods
@@ -61,7 +60,28 @@ extension ToDoItemViewController {
             print(#line, Date(), #function)
         }
         isCanceled = false
+    }
+    
+    
+    @objc func dateEndEdeting() {
         
+        isCanceled = true
+//        todo = originalToDo!.copy() as! ToDo
+        setEditing(false, animated: true)
+        print(#line, Date(), #function)
+    }
+    
+    @objc func dateChange(_ datePicker: MyUIDatePicker) {
+        if let indexPath = datePicker.indexPath {
+            let textField = (tableView.cellForRow(at: indexPath) as! StringCell).textField
+            textField?.text = datePicker.date.formatted
+            let date = datePicker.date
+            
+            let key = todo.keys[indexPath.section]
+            todo.setValue(date, forKey: key)
+            
+        }
+        print(#line, #function, datePicker.date.formatted)
     }
 }
 
@@ -109,8 +129,7 @@ extension ToDoItemViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
-        
+
         if editing {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(editingCancelled))
         } else {
@@ -127,11 +146,4 @@ extension ToDoItemViewController {
 //        print(Date(), #line, #function, todo, originalToDo)
         navigationItem.rightBarButtonItem = editButtonItem
     }
-    
-    @objc func textFieldEndEdeting() {
-//        setEditing(false, animated: true)
-//        view.endEditing(true)
-        print(#line, #function)
-    }
-    
 }

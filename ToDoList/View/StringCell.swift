@@ -27,11 +27,7 @@ class StringCell: UITableViewCell {
     @IBAction func textChanged(_ sender: UITextField) {
         delegate?.cell(textChanged: sender, forSection: section)
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func setValueForKey(_ sender: UITextField) {
+         delegate?.cell(textChanged: sender, forSection: section)
     }
-
 }

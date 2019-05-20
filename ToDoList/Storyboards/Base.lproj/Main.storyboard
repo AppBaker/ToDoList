@@ -76,6 +76,7 @@
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <action selector="editingEnded:" destination="cdY-bJ-laF" eventType="editingDidEnd" id="lNH-cZ-Gfa"/>
+                                                <action selector="setValueForKey:" destination="jcq-JK-l1m" eventType="valueChanged" id="8iO-z6-Tga"/>
                                                 <action selector="textChanged:" destination="cdY-bJ-laF" eventType="editingChanged" id="wgj-Tt-GN4"/>
                                             </connections>
                                         </textField>

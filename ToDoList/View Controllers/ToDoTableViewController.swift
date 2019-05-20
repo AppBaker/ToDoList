@@ -61,7 +61,8 @@ extension ToDoTableViewController {
         
         if let selectedIndex = tableView.indexPathForSelectedRow {
             //TODO: edit in place
-            todosMO[selectedIndex.row] = todoMO
+            todosMO.remove(at: selectedIndex.row)
+            todosMO.insert(todoMO, at: selectedIndex.row)
             tableView.reloadRows(at: [selectedIndex], with: .automatic)
         } else {
             //TODO: add new element
